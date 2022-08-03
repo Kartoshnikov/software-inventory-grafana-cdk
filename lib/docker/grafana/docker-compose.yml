@@ -1,0 +1,37 @@
+## For Development Testing ONLY!!!
+---
+version: "3.1"
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
+networks:
+  front-tier:
+  back-tier:
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.25.2
+    restart: always
+    ports:
+      - 9090:9090
+    networks:
+      - back-tier
+
+  grafana:
+    build: .
+    restart: always
+    volumes:
+      - ./config/provisioning/:/etc/grafana/provisioning/
+    depends_on:  
+      - prometheus
+    environment:
+      - GF_DEFAULT_INSTANCE_NAME=localDocker
+      - GF_SERVER_DOMAIN=docker.example.local
+      - GF_SERVER_ROOT_URL=https://docker.example.local
+    ports:
+      - 3000:3000
+    networks:
+      - back-tier
+      - front-tier

@@ -1,0 +1,13 @@
+---
+apiVersion: 1
+datasources:
+  - name: AmazonAthenaSoftwareInventory
+    type: grafana-athena-datasource
+    jsonData:
+      authType: default
+      assumeRoleArn: arn:aws:iam::111111111111:role/grafana-role
+      defaultRegion: us-east-1
+      catalog: AwsDataCatalog
+      database: example-software-inventory
+      workgroup: primary      
+      outputLocation: s3://example-software-inventory-athena-output

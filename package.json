@@ -1,0 +1,33 @@
+{
+  "name": "software-inventory-grafana",
+  "version": "0.1.0",
+  "bin": {
+    "cdk-grafana": "bin/cdk-grafana.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "synth": "cdk synth CdkGrafanaStack-Dev-$UUID  --context uuid=$UUID  --profile $PROFILE -v",
+    "deploy": "cdk deploy CdkGrafanaStack-Dev-$UUID  --context uuid=$UUID  --profile $PROFILE --require-approval never --outputs-file stack.json",
+    "destroy": "cdk destroy CdkGrafanaStack-Dev-$UUID --context uuid=$UUID --profile $PROFILE --force",
+    "cluster-deploy": "cdk deploy CdkGrafanaClusterStack-Dev --profile $PROFILE --require-approval never --outputs-file cluster.json",
+    "cluster-destroy": "cdk destroy CdkGrafanaClusterStack-Dev --profile $PROFILE --force"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
+    "aws-cdk": "~2.23.0",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.2.0",
+    "ts-node": "^9.0.0",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "~2.23.0",
+    "constructs": "~10.0.0",
+    "source-map-support": "^0.5.16",
+    "@example/example-cdk-lib": "~2.0.0"
+  }
+}

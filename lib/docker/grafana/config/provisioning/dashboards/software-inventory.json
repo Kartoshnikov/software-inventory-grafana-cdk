@@ -1,0 +1,199 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 1,
+    "iteration": 1659457171926,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": "AmazonAthenaSoftwareInventory",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 5,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "text": {}
+        },
+        "pluginVersion": "8.2.6",
+        "targets": [
+          {
+            "connectionArgs": {
+              "catalog": "__default",
+              "database": "__default",
+              "region": "__default"
+            },
+            "format": 1,
+            "rawSQL": "SELECT count(distinct(\"instanceid\")) FROM \"example_software_inventory\" where account in ($AccountID);",
+            "refId": "A"
+          }
+        ],
+        "title": "Number of Instances",
+        "type": "gauge"
+      },
+      {
+        "datasource": "AmazonAthenaSoftwareInventory",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "displayMode": "auto"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 24,
+          "w": 24,
+          "x": 0,
+          "y": 7
+        },
+        "id": 4,
+        "options": {
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": false,
+              "displayName": "Instance ID"
+            }
+          ]
+        },
+        "pluginVersion": "8.2.6",
+        "targets": [
+          {
+            "connectionArgs": {
+              "catalog": "__default",
+              "database": "__default",
+              "region": "__default"
+            },
+            "format": 1,
+            "rawSQL": "SELECT \r\n    date_parse(date,'%Y-%m-%d') AS Date,\r\n    account AS \"Account ID\",\r\n    instanceid AS \"Instance ID\",\r\n    name AS \"Name\",\r\n    packageid AS \"Package ID\",\r\n    publisher AS \"Publisher\",\r\n    summary AS \"Summary\",\r\n    osname AS \"OS Name\",\r\n    osversion AS \"OS Version\",\r\n    architecture AS \"Architecture\",\r\n    version AS \"Version\",\r\n    applcationtype AS \"App Type\",\r\n    instancename AS \"Instance Name\",\r\n    productname, costcentre, environment\r\nFROM \"example_software_inventory\"\r\nWHERE account in ($AccountID)",
+            "refId": "A"
+          }
+        ],
+        "title": "Software Inventory",
+        "type": "table"
+      }
+    ],
+    "schemaVersion": 32,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": [
+              "111111111111",
+              "222222222222"
+            ],
+            "value": [
+              "111111111111",
+              "222222222222"
+            ]
+          },
+          "datasource": "AmazonAthenaSoftwareInventory",
+          "definition": "",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": true,
+          "label": null,
+          "multi": true,
+          "name": "AccountID",
+          "options": [],
+          "query": {
+            "rawSQL": "SELECT distinct(account) FROM \"example_software_inventory\";"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Software Inventory",
+    "uid": "vpnvnbkVz",
+    "version": 5
+  }
